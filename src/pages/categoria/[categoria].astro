@@ -1,0 +1,11 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { blocks, getBlockForCategory } from '../../data/categories.js';
+const entries=await getCollection('articulos',({data})=>import.meta.env.PROD?data.draft!==true:true);
+export function getStaticPaths(){return blocks.map(block=>({params:{categoria:block.slug}}));}
+const block = blocks.find(item => item.slug === Astro.params.categoria);
+const info = block;
+const posts=entries.filter(p=>!p.data.draft && getBlockForCategory(p.data.category)?.slug===Astro.params.categoria);
+---
+<BaseLayout title={`${info.name} | Eficasa`} description={info.desc}><section class="category-hero"><div class="container"><span class="eyebrow">Categoría</span><h1>{info.name}</h1><p class="section-intro">{info.desc}</p></div></section><section class="section"><div class="container">{posts.length?<div class="grid">{posts.map(p=><article class="card article-card"><span class="badge">{p.data.pillar?'Pilar':'Guía'}</span><h2>{p.data.title}</h2><p>{p.data.description}</p><a class="read" href={`/articulos/${p.data.slug}`}>Leer artículo →</a></article>)}</div>:<div class="empty"><strong>Contenido en preparación.</strong><br/>Los artículos de esta categoría están redactados como borradores y no se publican hasta disponer de contenido final.</div>}</div></section></BaseLayout>

@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { getBlockForCategory } from '../data/categories.js';
+
+const entries = await getCollection('articulos', ({ data }) => data.draft === false);
+
+function sortKey(title) {
+  return title
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/^[^a-zA-Z0-9]+/, '');
+}
+
+const guides = entries.sort((a, b) =>
+  sortKey(a.data.title).localeCompare(sortKey(b.data.title), 'es', { sensitivity: 'base' })
+);
+
+const groups = [];
+for (const guide of guides) {
+  const key = sortKey(guide.data.title).charAt(0).toUpperCase();
+  let group = groups.find(item => item.letter === key);
+  if (!group) {
+    group = { letter: key, guides: [] };
+    groups.push(group);
+  }
+  group.guides.push(guide);
+}
+---
+<BaseLayout title="Todas las guías | Eficasa" description="Todas las guías de Eficasa sobre energía solar, ahorro en la factura, climatización, aislamiento y eficiencia energética.">
+  <section class="category-hero">
+    <div class="container">
+      <span class="eyebrow">Guías</span>
+      <h1>Todas las guías</h1>
+      <p class="section-intro">{guides.length} guías</p>
+      <p><a href="/#bloques">← Volver a los bloques</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      {groups.map(group => (
+        <section style="margin-bottom:42px">
+          <h2>{group.letter}</h2>
+          <div class="grid" style="margin-top:18px">
+            {group.guides.map(guide => {
+              const block = getBlockForCategory(guide.data.category);
+              return (
+                <article class="card article-card">
+                  <h3><a href={`/articulos/${guide.data.slug}`}>{guide.data.title}</a></h3>
+                  {block && <span class="badge">{block.name}</span>}
+                  <p>{guide.data.description}</p>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

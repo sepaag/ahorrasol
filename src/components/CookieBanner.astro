@@ -1,0 +1,6 @@
+<div class="cookie" id="cookie-banner" role="dialog" aria-label="Preferencias de cookies">
+  <strong>Cookies y privacidad</strong>
+  <p class="small">Eficasa no activa publicidad ni cookies de terceros por defecto. Este aviso deja preparado el consentimiento para futuras herramientas de analítica o publicidad.</p>
+  <div class="cookie-actions"><button class="btn btn-primary" id="cookie-accept">Aceptar</button><button class="btn btn-secondary" id="cookie-reject">Rechazar</button><button class="btn btn-secondary" id="cookie-config">Configurar</button></div>
+</div>
+<script is:inline>{`(()=>{const k='eficasa-consent';const el=document.getElementById('cookie-banner');if(!localStorage.getItem(k))el?.classList.add('show');const save=v=>{localStorage.setItem(k,v);el?.classList.remove('show')};document.getElementById('cookie-accept')?.addEventListener('click',()=>save('accepted'));document.getElementById('cookie-reject')?.addEventListener('click',()=>save('rejected'));document.getElementById('cookie-config')?.addEventListener('click',()=>alert('Actualmente solo se utilizan cookies técnicas imprescindibles. La publicidad y analítica permanecen desactivadas.'));})();`}</script>

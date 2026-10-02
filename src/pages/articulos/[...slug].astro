@@ -1,0 +1,26 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import JsonLd from '../../components/JsonLd.astro';
+import AdSlot from '../../components/AdSlot.astro';
+export async function getStaticPaths(){
+  const entries=await getCollection('articulos',({data})=>import.meta.env.PROD?data.draft!==true:true);
+  return entries.map(e=>({params:{slug:e.data.slug},props:{entry:e}}));
+}
+const entries=await getCollection('articulos',({data})=>import.meta.env.PROD?data.draft!==true:true);
+const {entry}=Astro.props; const {Content}=await render(entry);
+const published=entries.filter(e=>!e.data.draft); const related=published.filter(e=>e.data.category===entry.data.category&&e.data.slug!==entry.data.slug).slice(0,3);
+function headings(body){return [...body.matchAll(/^## (.+)$/gm)].map((m,i)=>({text:m[1],id:m[1].toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')}));}
+const toc=headings(entry.body??'');
+const articleLd={"@context":"https://schema.org","@type":"Article","headline":entry.data.title,"description":entry.data.description,"datePublished":entry.data.date.toISOString(),"dateModified":entry.data.updated.toISOString(),"author":{"@type":"Person","name":"sepaag"},"publisher":{"@type":"Organization","name":"Eficasa"}};
+const faqLd=entry.data.faq.length?{"@context":"https://schema.org","@type":"FAQPage","mainEntity":entry.data.faq.map(x=>({"@type":"Question","name":x.q,"acceptedAnswer":{"@type":"Answer","text":x.a}}))}:null;
+---
+<BaseLayout title={`${entry.data.title} | Eficasa`} description={entry.data.description}>
+<JsonLd data={articleLd}/>{faqLd&&<JsonLd data={faqLd}/>}<div class="container reading"><div class="breadcrumbs"><a href="/">Inicio</a> → <a href="/categoria/ahorro">{entry.data.category}</a> → {entry.data.title}</div>
+<header class="article-head"><span class="badge">{entry.data.category}</span><h1>{entry.data.title}</h1><div class="meta"><span>Publicado: {entry.data.date.toLocaleDateString('es-ES')}</span><span>Actualizado: {entry.data.updated.toLocaleDateString('es-ES')}</span><span>Por sepaag</span></div></header>
+{toc.length>0&&<nav class="toc" aria-label="Índice de contenidos"><strong>En este artículo</strong><ol>{toc.map(h=><li><a href={`#${h.id}`}>{h.text}</a></li>)}</ol></nav>}
+<article class="prose"><Content /></article>
+{entry.data.faq.length>0&&<section class="faq"><h2>Preguntas frecuentes</h2>{entry.data.faq.map(f=><details><summary>{f.q}</summary><p>{f.a}</p></details>)}</section>}
+<div class="notice"><strong>Ojo:</strong> Los datos y precios cambian; comprueba siempre las fuentes oficiales y las condiciones de tu comercializadora antes de tomar una decisión.</div><AdSlot />
+{related.length>0&&<section class="related"><h2>Sigue leyendo</h2><div class="grid">{related.map(r=><article class="card"><span class="badge">{r.data.category}</span><h3>{r.data.title}</h3><p>{r.data.description}</p><a href={`/articulos/${r.data.slug}`}>Leer →</a></article>)}</div></section>}
+</div></BaseLayout>

@@ -1,0 +1,99 @@
+---
+import '../styles/global.css';
+import CookieBanner from '../components/CookieBanner.astro';
+import { blocks } from '../data/categories.js';
+const { title = 'Eficasa — Energía solar y ahorro energético', description = 'Guías claras para entender tu factura, ahorrar energía y valorar soluciones como placas solares y aerotermia.', canonical = Astro.url.href } = Astro.props;
+---
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={title} /><meta property="og:description" content={description} /><meta property="og:type" content="website" /><meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" /><meta name="twitter:title" content={title} /><meta name="twitter:description" content={description} />
+    <!-- ADSENSE_VERIFICATION: pegar aquí el código cuando Google AdSense lo proporcione. -->
+  </head>
+  <body>
+    <header class="site-header"><div class="container nav">
+      <a class="brand" href="/" aria-label="Eficasa, inicio">Efi<span>casa</span></a>
+      <button class="menu-button" aria-expanded="false" aria-controls="main-menu">☰<span class="sr-only">Abrir menú</span></button>
+      <nav id="main-menu" class="nav-links" aria-label="Navegación principal">
+        <a href="/">Inicio</a>
+        <div class="temas-menu">
+          <button type="button" class="temas-button" aria-expanded="false" aria-controls="temas-submenu">Temas <span aria-hidden="true">▾</span></button>
+          <div id="temas-submenu" class="temas-submenu" hidden>
+            {blocks.map(block => <a href={block.url}>{block.name}</a>)}
+            <a href="/guias">Todas las guías</a>
+          </div>
+        </div>
+        <a href="/herramientas">Herramientas</a><a href="/quien-soy">Quién soy</a><a href="/contacto">Contacto</a>
+      </nav>
+    </div></header>
+    <main><slot /></main>
+    <footer class="site-footer"><div class="container footer-grid">
+      <div><div class="brand">Efi<span>casa</span></div><p class="small">Información práctica sobre energía solar, factura de la luz y ahorro energético en España.</p><p class="small">Contenido revisado y actualizado con fuentes oficiales cuando corresponde.</p></div>
+      <div><strong>Explora</strong><div class="footer-links"><a href="/categoria/placas-solares">Placas solares</a><a href="/categoria/ahorro">Ahorro en casa</a><a href="/herramientas">Herramientas</a></div></div>
+      <div><strong>Información</strong><div class="footer-links"><a href="/quien-soy">Quién soy</a><a href="/contacto">Contacto</a><a href="/aviso-legal">Aviso legal</a><a href="/privacidad">Privacidad</a><a href="/cookies">Cookies</a></div></div>
+    </div><div class="container small" style="margin-top:28px">© {new Date().getFullYear()} Eficasa · sepaag</div></footer>
+    <CookieBanner />
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const b = document.querySelector('.menu-button');
+        const n = document.querySelector('#main-menu');
+        const tb = document.querySelector('.temas-button');
+        const ts = document.querySelector('#temas-submenu');
+        const tm = document.querySelector('.temas-menu');
+
+        const closeTemas = () => {
+          if (!tb || !ts) return;
+          tb.setAttribute('aria-expanded', 'false');
+          ts.hidden = true;
+        };
+
+        const openTemas = () => {
+          if (!tb || !ts) return;
+          tb.setAttribute('aria-expanded', 'true');
+          ts.hidden = false;
+        };
+
+        b?.addEventListener('click', () => {
+          const isOpen = n.classList.toggle('open');
+          b.setAttribute('aria-expanded', String(isOpen));
+        });
+
+        tb?.addEventListener('click', (e) => {
+          e.preventDefault();
+          const isOpen = tb.getAttribute('aria-expanded') === 'true';
+          isOpen ? closeTemas() : openTemas();
+        });
+
+        document.addEventListener('keydown', e => {
+          if (e.key === 'Escape') closeTemas();
+        });
+
+        document.addEventListener('click', e => {
+          if (tm && !tm.contains(e.target)) closeTemas();
+        });
+      });
+    </script>
+    <style>
+      .temas-menu{position:relative}
+      .temas-button{font:inherit;font-weight:700;color:var(--teal-dark);background:transparent;border:1px solid transparent;border-radius:10px;padding:8px 10px;cursor:pointer}
+      .temas-button:hover,.temas-button[aria-expanded="true"]{background:var(--teal);color:#fff}
+      .temas-submenu{position:absolute;top:calc(100% + 10px);right:0;z-index:30;min-width:310px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:8px;box-shadow:var(--shadow)}
+      .temas-submenu a{display:block;padding:10px 12px;border-radius:9px;color:var(--ink);font-weight:700}
+      .temas-submenu a:hover,.temas-submenu a:focus-visible{background:var(--teal-soft);color:var(--teal-dark);text-decoration:none;outline:none}
+      .temas-button:focus-visible{outline:3px solid var(--teal-soft);outline-offset:2px}
+      @media(max-width:850px){
+        .temas-menu{width:100%}
+        .temas-button{width:100%;text-align:left;padding:10px 0}
+        .temas-submenu{position:static;min-width:0;width:100%;margin-top:4px;box-shadow:none;border-radius:10px;background:var(--teal-soft)}
+        .temas-submenu a{padding:9px 12px}
+      }
+    </style>
+  </body>
+</html>

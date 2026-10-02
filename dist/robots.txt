@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://tu-dominio-pendiente.es/sitemap-index.xml
