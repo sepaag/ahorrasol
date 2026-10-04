@@ -16,7 +16,7 @@ const articleLd={"@context":"https://schema.org","@type":"Article","headline":en
 const faqLd=entry.data.faq.length?{"@context":"https://schema.org","@type":"FAQPage","mainEntity":entry.data.faq.map(x=>({"@type":"Question","name":x.q,"acceptedAnswer":{"@type":"Answer","text":x.a}}))}:null;
 ---
 <BaseLayout title={`${entry.data.title} | Eficasa`} description={entry.data.description}>
-<JsonLd data={articleLd}/>{faqLd&&<JsonLd data={faqLd}/>}<div class="container reading"><div class="breadcrumbs"><a href="/">Inicio</a> → <a href="/categoria/ahorro">{entry.data.category}</a> → {entry.data.title}</div>
+<JsonLd data={articleLd}/>{faqLd&&<JsonLd data={faqLd}/>}<div class="container reading"><div class="breadcrumbs"><a href="/eficasa/">Inicio</a> → <a href="/eficasa/categoria/ahorro">{entry.data.category}</a> → {entry.data.title}</div>
 <header class="article-head"><span class="badge">{entry.data.category}</span><h1>{entry.data.title}</h1><div class="meta"><span>Publicado: {entry.data.date.toLocaleDateString('es-ES')}</span><span>Actualizado: {entry.data.updated.toLocaleDateString('es-ES')}</span><span>Por sepaag</span></div></header>
 {toc.length>0&&<nav class="toc" aria-label="Índice de contenidos"><strong>En este artículo</strong><ol>{toc.map(h=><li><a href={`#${h.id}`}>{h.text}</a></li>)}</ol></nav>}
 <article class="prose"><Content /></article>

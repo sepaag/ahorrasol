@@ -19,25 +19,25 @@ const { title = 'Eficasa — Energía solar y ahorro energético', description =
   </head>
   <body>
     <header class="site-header"><div class="container nav">
-      <a class="brand" href="/" aria-label="Eficasa, inicio">Efi<span>casa</span></a>
+      <a class="brand" href="/eficasa/" aria-label="Eficasa, inicio">Efi<span>casa</span></a>
       <button class="menu-button" aria-expanded="false" aria-controls="main-menu">☰<span class="sr-only">Abrir menú</span></button>
       <nav id="main-menu" class="nav-links" aria-label="Navegación principal">
-        <a href="/">Inicio</a>
+        <a href="/eficasa/">Inicio</a>
         <div class="temas-menu">
           <button type="button" class="temas-button" aria-expanded="false" aria-controls="temas-submenu">Temas <span aria-hidden="true">▾</span></button>
           <div id="temas-submenu" class="temas-submenu" hidden>
             {blocks.map(block => <a href={block.url}>{block.name}</a>)}
-            <a href="/guias">Todas las guías</a>
+            <a href="/eficasa/guias">Todas las guías</a>
           </div>
         </div>
-        <a href="/herramientas">Herramientas</a><a href="/quien-soy">Quién soy</a><a href="/contacto">Contacto</a>
+        <a href="/eficasa/herramientas">Herramientas</a><a href="/eficasa/quien-soy">Quién soy</a><a href="/eficasa/contacto">Contacto</a>
       </nav>
     </div></header>
     <main><slot /></main>
     <footer class="site-footer"><div class="container footer-grid">
       <div><div class="brand">Efi<span>casa</span></div><p class="small">Información práctica sobre energía solar, factura de la luz y ahorro energético en España.</p><p class="small">Contenido revisado y actualizado con fuentes oficiales cuando corresponde.</p></div>
-      <div><strong>Explora</strong><div class="footer-links"><a href="/categoria/placas-solares">Placas solares</a><a href="/categoria/ahorro">Ahorro en casa</a><a href="/herramientas">Herramientas</a></div></div>
-      <div><strong>Información</strong><div class="footer-links"><a href="/quien-soy">Quién soy</a><a href="/contacto">Contacto</a><a href="/aviso-legal">Aviso legal</a><a href="/privacidad">Privacidad</a><a href="/cookies">Cookies</a></div></div>
+      <div><strong>Explora</strong><div class="footer-links"><a href="/eficasa/categoria/placas-solares">Placas solares</a><a href="/eficasa/categoria/ahorro">Ahorro en casa</a><a href="/eficasa/herramientas">Herramientas</a></div></div>
+      <div><strong>Información</strong><div class="footer-links"><a href="/eficasa/quien-soy">Quién soy</a><a href="/eficasa/contacto">Contacto</a><a href="/eficasa/aviso-legal">Aviso legal</a><a href="/eficasa/privacidad">Privacidad</a><a href="/eficasa/cookies">Cookies</a></div></div>
     </div><div class="container small" style="margin-top:28px">© {new Date().getFullYear()} Eficasa · sepaag</div></footer>
     <CookieBanner />
     <script>
