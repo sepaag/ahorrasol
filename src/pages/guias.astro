@@ -47,7 +47,7 @@ for (const guide of guides) {
               const block = getBlockForCategory(guide.data.category);
               return (
                 <article class="card article-card">
-                  <h3><a href={`/articulos/${guide.data.slug}`}>{guide.data.title}</a></h3>
+                  <h3><a href={`/eficasa/articulos/${guide.data.slug}`}>{guide.data.title}</a></h3>
                   {block && <span class="badge">{block.name}</span>}
                   <p>{guide.data.description}</p>
                 </article>
