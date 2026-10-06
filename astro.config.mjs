@@ -3,7 +3,7 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://sepaag.github.io',
-  base: '/LuzClara',
+  base: '/ahorrasol',
   integrations: [sitemap()],
   build: { format: 'directory' }
 });

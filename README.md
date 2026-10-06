@@ -1,9 +1,9 @@
-# LuzClara
+# Ahorrasol
 
 Web estática en Astro 7 para contenido en español sobre energía solar y ahorro energético.
 
 ## Datos del proyecto
-- Nombre: LuzClara
+- Nombre: Ahorrasol
 - Autor: sepaag
 - Contacto: sergiopalling@gmail.com
 - Dominio: pendiente de elegir

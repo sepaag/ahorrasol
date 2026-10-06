@@ -3,7 +3,7 @@ export const blocks = [
     key: 'A',
     name: 'Placas solares y autoconsumo',
     desc: 'Costes, rentabilidad, trámites y baterías.',
-    url: '/LuzClara/categoria/placas-solares',
+    url: '/ahorrasol/categoria/placas-solares',
     icon: '☀️',
     slug: 'placas-solares'
   },
@@ -11,7 +11,7 @@ export const blocks = [
     key: 'B',
     name: 'Ayudas y deducciones',
     desc: 'Subvenciones, IRPF, IBI e ICIO.',
-    url: '/LuzClara/categoria/ayudas',
+    url: '/ahorrasol/categoria/ayudas',
     icon: '€',
     slug: 'ayudas'
   },
@@ -19,7 +19,7 @@ export const blocks = [
     key: 'C',
     name: 'Ahorro en la factura y en casa',
     desc: 'Potencia, consumo, tarifas y hábitos.',
-    url: '/LuzClara/categoria/ahorro',
+    url: '/ahorrasol/categoria/ahorro',
     icon: '💡',
     slug: 'ahorro'
   },
@@ -27,7 +27,7 @@ export const blocks = [
     key: 'D',
     name: 'Climatización y aislamiento',
     desc: 'Aerotermia, bomba de calor y aislamiento.',
-    url: '/LuzClara/categoria/climatizacion',
+    url: '/ahorrasol/categoria/climatizacion',
     icon: '🏠',
     slug: 'climatizacion'
   },
@@ -35,7 +35,7 @@ export const blocks = [
     key: 'E',
     name: 'Extras',
     desc: 'Coche eléctrico, balcón y certificado energético.',
-    url: '/LuzClara/categoria/extras',
+    url: '/ahorrasol/categoria/extras',
     icon: '⚡',
     slug: 'extras'
   }

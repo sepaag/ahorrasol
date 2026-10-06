@@ -27,13 +27,13 @@ for (const guide of guides) {
   group.guides.push(guide);
 }
 ---
-<BaseLayout title="Todas las guías | LuzClara" description="Todas las guías de LuzClara sobre energía solar, ahorro en la factura, climatización, aislamiento y eficiencia energética.">
+<BaseLayout title="Todas las guías | Ahorrasol" description="Todas las guías de Ahorrasol sobre energía solar, ahorro en la factura, climatización, aislamiento y eficiencia energética.">
   <section class="category-hero">
     <div class="container">
       <span class="eyebrow">Guías</span>
       <h1>Todas las guías</h1>
       <p class="section-intro">{guides.length} guías</p>
-      <p><a href="/LuzClara/#bloques">← Volver a los bloques</a></p>
+      <p><a href="/ahorrasol/#bloques">← Volver a los bloques</a></p>
     </div>
   </section>
 
@@ -47,7 +47,7 @@ for (const guide of guides) {
               const block = getBlockForCategory(guide.data.category);
               return (
                 <article class="card article-card">
-                  <h3><a href={`/LuzClara/articulos/${guide.data.slug}`}>{guide.data.title}</a></h3>
+                  <h3><a href={`/ahorrasol/articulos/${guide.data.slug}`}>{guide.data.title}</a></h3>
                   {block && <span class="badge">{block.name}</span>}
                   <p>{guide.data.description}</p>
                 </article>

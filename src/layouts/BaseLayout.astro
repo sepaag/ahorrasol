@@ -2,7 +2,9 @@
 import '../styles/global.css';
 import CookieBanner from '../components/CookieBanner.astro';
 import { blocks } from '../data/categories.js';
-const { title = 'LuzClara — Energía solar y ahorro energético', description = 'Guías claras para entender tu factura, ahorrar energía y valorar soluciones como placas solares y aerotermia.', canonical = Astro.url.href } = Astro.props;
+const { title = 'Ahorrasol — Energía solar y ahorro energético', description = 'Guías claras para entender tu factura, ahorrar energía y valorar soluciones como placas solares y aerotermia.', canonical = Astro.url.href } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const u = (path = '/') => `${base}${path}`;
 ---
 <!doctype html>
 <html lang="es-ES">
@@ -19,26 +21,26 @@ const { title = 'LuzClara — Energía solar y ahorro energético', description 
   </head>
   <body>
     <header class="site-header"><div class="container nav">
-      <a class="brand" href="/LuzClara/" aria-label="LuzClara, inicio">Efi<span>casa</span></a>
+      <a class="brand" href={u('/')} aria-label="Ahorrasol, inicio">Ahorra<span>sol</span></a>
       <button class="menu-button" aria-expanded="false" aria-controls="main-menu">☰<span class="sr-only">Abrir menú</span></button>
       <nav id="main-menu" class="nav-links" aria-label="Navegación principal">
-        <a href="/LuzClara/">Inicio</a>
+        <a href={u('/')}>Inicio</a>
         <div class="temas-menu">
           <button type="button" class="temas-button" aria-expanded="false" aria-controls="temas-submenu">Temas <span aria-hidden="true">▾</span></button>
           <div id="temas-submenu" class="temas-submenu" hidden>
             {blocks.map(block => <a href={block.url}>{block.name}</a>)}
-            <a href="/LuzClara/guias">Todas las guías</a>
+            <a href={u('/guias')}>Todas las guías</a>
           </div>
         </div>
-        <a href="/LuzClara/herramientas">Herramientas</a><a href="/LuzClara/quien-soy">Quién soy</a><a href="/LuzClara/contacto">Contacto</a>
+        <a href={u('/herramientas')}>Herramientas</a><a href={u('/quien-soy')}>Quién soy</a><a href={u('/contacto')}>Contacto</a>
       </nav>
     </div></header>
     <main><slot /></main>
     <footer class="site-footer"><div class="container footer-grid">
-      <div><div class="brand">Efi<span>casa</span></div><p class="small">Información práctica sobre energía solar, factura de la luz y ahorro energético en España.</p><p class="small">Contenido revisado y actualizado con fuentes oficiales cuando corresponde.</p></div>
-      <div><strong>Explora</strong><div class="footer-links"><a href="/LuzClara/categoria/placas-solares">Placas solares</a><a href="/LuzClara/categoria/ahorro">Ahorro en casa</a><a href="/LuzClara/herramientas">Herramientas</a></div></div>
-      <div><strong>Información</strong><div class="footer-links"><a href="/LuzClara/quien-soy">Quién soy</a><a href="/LuzClara/contacto">Contacto</a><a href="/LuzClara/aviso-legal">Aviso legal</a><a href="/LuzClara/privacidad">Privacidad</a><a href="/LuzClara/cookies">Cookies</a></div></div>
-    </div><div class="container small" style="margin-top:28px">© {new Date().getFullYear()} LuzClara · sepaag</div></footer>
+      <div><div class="brand">Ahorra<span>sol</span></div><p class="small">Información práctica sobre energía solar, factura de la luz y ahorro energético en España.</p><p class="small">Contenido revisado y actualizado con fuentes oficiales cuando corresponde.</p></div>
+      <div><strong>Explora</strong><div class="footer-links"><a href={u('/categoria/placas-solares')}>Placas solares</a><a href={u('/categoria/ahorro')}>Ahorro en casa</a><a href={u('/herramientas')}>Herramientas</a></div></div>
+      <div><strong>Información</strong><div class="footer-links"><a href={u('/quien-soy')}>Quién soy</a><a href={u('/contacto')}>Contacto</a><a href={u('/aviso-legal')}>Aviso legal</a><a href={u('/privacidad')}>Privacidad</a><a href={u('/cookies')}>Cookies</a></div></div>
+    </div><div class="container small" style="margin-top:28px">© {new Date().getFullYear()} Ahorrasol · sepaag</div></footer>
     <CookieBanner />
     <script>
       document.addEventListener('DOMContentLoaded', () => {
